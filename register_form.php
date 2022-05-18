@@ -12,12 +12,12 @@
         $pass2 = md5($_POST['pass2']);
         $choice = $_POST['choice'];
 
-        $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+        $select = " SELECT * FROM user_form WHERE email = '$email' ";
 
         $result = mysqli_query($conn, $select);
 
         if(mysqli_num_rows($result) > 0){
-            $error[] = 'user already exist!';
+            $error[] = 'email already exist!';
         } else {
             if (empty($_POST["name"])) {
                 $nameErr = "Name is required!";
