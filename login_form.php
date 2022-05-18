@@ -7,10 +7,11 @@
     $nameErr = $emailErr = $passErr2 = $passErr = $choiceErr = "" ;
 
     if(isset($_POST['submit'])) {
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        // $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $email = $_POST['email'];
         $pass = md5($_POST['pass']);
 
-        $select = "SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+        $select = "SELECT * FROM user_form WHERE email = '$email' AND password = '$pass' ";
 
         $result = mysqli_query($conn, $select);
 
