@@ -20,14 +20,19 @@ if(isset($_POST['submit'])){
 
    }else{
 
-      if($pass != $cpass){
-         $error[] = 'password not matched!';
-      }else{
-          
-         $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
-         mysqli_query($conn, $insert);
-         header('location:login_form.php');
-      }
+    if($pass != $cpass){
+        $error[] = 'password not matched!';
+    }elseif (empty($_POST["name"])) {
+        $error[] = "Name is required!";
+    }elseif (empty($_POST["email"])) {
+        $error[] = "Email is required!";
+    }elseif (empty($_POST["password"])) {
+        $error[] = "Password is required!";
+    }else{
+        $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
+        mysqli_query($conn, $insert);
+        header('location:login_form.php');
+    }
    }
 
 };
@@ -48,7 +53,7 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
-    <?php
+<?php
         function test_input($data){
             $data = trim($data); //ignore the spaces
             $data = stripslashes($data); //ignore slashes
